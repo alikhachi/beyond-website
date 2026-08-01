@@ -34,7 +34,7 @@
 
     const resultsList = document.getElementById('case-results');
     resultsList.innerHTML = t.results
-      .map((r) => `<li class="reveal">${r}</li>`)
+      .map((r, i) => `<li class="reveal" style="transition-delay:${i * 0.08}s">${r}</li>`)
       .join('');
 
     const statsSection = document.getElementById('case-stats-section');
@@ -57,7 +57,7 @@
       galleryGrid.innerHTML = data.gallery
         .map(
           (src, i) =>
-            `<div class="case-gallery-item reveal"><img src="${src}" alt="${t.title} ${i + 2}" loading="lazy"></div>`
+            `<div class="case-gallery-item reveal" style="transition-delay:${(i % 3) * 0.1}s"><img src="${src}" alt="${t.title} ${i + 2}" loading="lazy"></div>`
         )
         .join('');
     } else {
