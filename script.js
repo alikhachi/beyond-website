@@ -14,6 +14,15 @@ if (header) {
 // even loaded. Without this, the track's total width creeps up as images arrive
 // asynchronously, which breaks the "-50%" loop math in the CSS animation and shows up
 // as a blank gap right at the seam where it should loop seamlessly.
+//
+// LOGO_SCALES corrects for *optical* size: two logos can share the same bounding-box
+// height yet read as very different sizes — a bold single-line wordmark fills its box
+// with thick strokes, while a logo with a tagline, fine linework, or a lot of internal
+// whitespace looks smaller and lighter at the same box height. The scale factor (derived
+// from each logo's ink density relative to the set's median, clamped to 0.9–1.25) is
+// applied as a CSS transform, which resizes the *paint* only — it does not change the
+// element's layout box, so the width bookkeeping above (and the seamless-loop math it
+// enables) is unaffected.
 const partnersTrack = document.getElementById('partners-track');
 if (partnersTrack) {
   const LOGO_WIDTHS = {
@@ -26,6 +35,16 @@ if (partnersTrack) {
     '49': 194, '50': 211, '51': 350, '52': 175, '53': 137, '54': 494, '55': 222, '56': 90,
     '57': 110, '58': 110,
   };
+  const LOGO_SCALES = {
+    '01': 0.9, '02': 1.25, '03': 0.923, '04': 1.25, '05': 1.218, '06': 1.25, '07': 1.03, '08': 0.93,
+    '09': 0.9, '10': 0.969, '11': 0.988, '12': 0.9, '13': 1.25, '14': 1.08, '15': 1.183, '16': 1.096,
+    '17': 1.061, '18': 1.25, '19': 1.117, '20': 0.934, '21': 0.9, '22': 0.9, '23': 0.944, '24': 1.07,
+    '25': 1.004, '26': 1.16, '27': 0.9, '28': 1.045, '29': 0.927, '30': 0.9, '31': 0.9, '32': 1.206,
+    '33': 1.25, '34': 1.14, '35': 0.911, '36': 1.039, '37': 1.25, '38': 1.209, '39': 1.0, '40': 1.204,
+    '41': 0.9, '42': 1.25, '43': 0.947, '44': 0.9, '45': 1.25, '46': 1.25, '47': 0.995, '48': 1.188,
+    '49': 0.952, '50': 1.011, '51': 0.9, '52': 0.947, '53': 0.9, '54': 0.9, '55': 0.9, '56': 1.072,
+    '57': 0.9, '58': 0.9,
+  };
   // Not Object.keys(LOGO_WIDTHS): JS enumerates canonical-integer-looking keys
   // ("10".."58") in numeric order before plain string keys ("01".."09"),
   // which would scramble the intended left-to-right logo sequence.
@@ -34,7 +53,7 @@ if (partnersTrack) {
     names
       .map(
         (n) =>
-          `<img src="assets/img/partners/logo-${n}.webp" alt="" width="${LOGO_WIDTHS[n]}" height="110">`
+          `<img src="assets/img/partners/logo-${n}.webp" alt="" width="${LOGO_WIDTHS[n]}" height="110" style="transform:scale(${LOGO_SCALES[n]})">`
       )
       .join('');
   partnersTrack.innerHTML = buildSet() + buildSet();
