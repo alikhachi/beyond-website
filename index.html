@@ -6,8 +6,8 @@
 <title data-i18n-title>Beyond Marketing Agency | بيوند لخدمات التسويق</title>
 <meta name="description" content="بيوند وكالة تسويق عراقية رائدة تعتمد منهجية التسويق المبني على البيانات. إدارة سوشيال ميديا، أبحاث سوق، بناء علامات تجارية، إنتاج، وحملات ميدانية متكاملة 360°.">
 <link rel="icon" href="assets/img/mark-black.png">
-<link rel="stylesheet" href="styles.css?v=9">
-<script src="i18n.js?v=9" defer></script>
+<link rel="stylesheet" href="styles.css?v=10">
+<script src="i18n.js?v=10" defer></script>
 </head>
 <body>
 
@@ -210,7 +210,7 @@
       <ul>
         <li><a href="#about" data-i18n="nav.about">من نحن</a></li>
         <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
-        <li><a href="#work" data-i18n="nav.work">أعمالنا</a></li>
+        <li><a href="work.html" data-i18n="nav.work">أعمالنا</a></li>
         <li><a href="#testimonials" data-i18n="nav.testimonials">عملاؤنا</a></li>
         <li><a href="#contact" data-i18n="nav.contact">تواصل معنا</a></li>
         <li class="nav-lang-item"><button type="button" class="lang-toggle" aria-label="Switch language"><span class="lang-switch-label">English</span></button></li>
@@ -243,7 +243,7 @@
         ونحوّل العلامات التجارية إلى تجارب حقيقية يعيشها الجمهور ويتفاعل معها.
       </p>
       <div class="hero-actions reveal">
-        <a href="#work" class="btn btn-primary" data-i18n="hero.cta1">شاهد أعمالنا</a>
+        <a href="work.html" class="btn btn-primary" data-i18n="hero.cta1">شاهد أعمالنا</a>
         <a href="#contact" class="btn btn-outline-light" data-i18n="hero.cta2">تواصل معنا</a>
       </div>
     </div>
@@ -474,6 +474,10 @@
           </div>
         </a>
       </div>
+
+      <div class="work-view-all reveal">
+        <a href="work.html" class="btn btn-outline-dark" data-i18n="work.viewAll">شاهد جميع الأعمال والتفاصيل</a>
+      </div>
     </div>
   </section>
 
@@ -500,11 +504,14 @@
     <div class="container">
       <p class="section-kicker reveal" data-i18n="clients.kicker">من بين أكثر من 50 علامة تجارية</p>
       <h2 class="section-title reveal" data-i18n="clients.title">شركاؤنا في <span class="text-accent">النجاح</span></h2>
-      <div class="partners-wrap reveal">
-        <div class="marquee-track" id="partners-track">
-          <!-- logos injected by script.js, duplicated for seamless loop -->
+      <a href="partners.html" class="partners-link reveal" aria-label="شاهد جميع شركائنا">
+        <div class="partners-wrap">
+          <div class="marquee-track" id="partners-track">
+            <!-- logos injected by script.js, duplicated for seamless loop -->
+          </div>
         </div>
-      </div>
+      </a>
+      <p class="partners-hint reveal" data-i18n="clients.hint">اضغط لمشاهدة أكثر من 60 قصة نجاح</p>
     </div>
   </section>
 
@@ -623,7 +630,7 @@
     <nav class="footer-nav">
       <a href="#about" data-i18n="nav.about">من نحن</a>
       <a href="#services" data-i18n="nav.services">خدماتنا</a>
-      <a href="#work" data-i18n="nav.work">أعمالنا</a>
+      <a href="work.html" data-i18n="nav.work">أعمالنا</a>
       <a href="#contact" data-i18n="nav.contact">تواصل معنا</a>
     </nav>
     <p class="footer-copy" data-i18n="footer.copy">© 2026 Beyond Marketing Agency. جميع الحقوق محفوظة.</p>
@@ -636,6 +643,6 @@
   </svg>
 </a>
 
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 </body>
 </html>

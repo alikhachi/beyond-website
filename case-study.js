@@ -7,7 +7,7 @@
   const data = CASE_STUDIES[id];
 
   if (!data) {
-    window.location.href = 'index.html#work';
+    window.location.href = 'work.html';
     return;
   }
 

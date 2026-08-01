@@ -101,6 +101,15 @@ const TRANSLATIONS = {
 
     'clients.kicker': 'من بين أكثر من 50 علامة تجارية',
     'clients.title': 'شركاؤنا في <span class="text-accent">النجاح</span>',
+    'clients.hint': 'اضغط لمشاهدة أكثر من 60 قصة نجاح',
+
+    'partners.pageKicker': 'أكثر من 60 قصة نجاح',
+    'partners.pageLead': 'نفخر بثقة أكثر من 60 علامة تجارية عبر قطاعات متنوعة اختارت بيوند شريكًا لصناعة قصص نجاحها.',
+    'partners.ctaKicker': 'انضم إلينا',
+    'partners.ctaTitle': 'انضم الى قائمة عملائنا',
+    'partners.ctaDesc': 'هل تبحث عن شريك تسويقي يحوّل علامتك التجارية إلى قصة نجاحها القادمة؟ تواصل معنا اليوم.',
+
+    'work.viewAll': 'شاهد جميع الأعمال والتفاصيل',
 
     'testimonials.kicker': 'عملاؤنا',
     'testimonials.title': 'ماذا يقول <span class="text-accent">شركاؤنا</span>',
@@ -252,6 +261,15 @@ const TRANSLATIONS = {
 
     'clients.kicker': 'Among more than 50 brands',
     'clients.title': 'Our Partners in <span class="text-accent">Success</span>',
+    'clients.hint': 'Click to see 60+ success stories',
+
+    'partners.pageKicker': 'More Than 60 Success Stories',
+    'partners.pageLead': "We're proud of the trust of 60+ brands across diverse sectors who chose Beyond as their partner in building success stories.",
+    'partners.ctaKicker': 'Join Us',
+    'partners.ctaTitle': 'Join Our Client List',
+    'partners.ctaDesc': 'Looking for a marketing partner to turn your brand into its next success story? Get in touch with us today.',
+
+    'work.viewAll': 'View All Our Work & Case Studies',
 
     'testimonials.kicker': 'Our Clients',
     'testimonials.title': 'What Our <span class="text-accent">Partners Say</span>',

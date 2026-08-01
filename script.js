@@ -23,37 +23,41 @@ if (header) {
 // applied as a CSS transform, which resizes the *paint* only — it does not change the
 // element's layout box, so the width bookkeeping above (and the seamless-loop math it
 // enables) is unaffected.
+// Hoisted to top level (not just inside the marquee's if-block below) so other
+// pages' scripts loaded after this one — e.g. the standalone partners grid —
+// can reuse the same width/scale data instead of duplicating it.
+const PARTNER_LOGO_WIDTHS = {
+  '01': 391, '02': 82, '03': 128, '04': 163, '05': 108, '06': 212, '07': 478, '08': 218,
+  '09': 236, '10': 62, '11': 395, '12': 124, '13': 324, '14': 143, '15': 130, '16': 188,
+  '17': 82, '18': 126, '19': 353, '20': 266, '21': 186, '22': 87, '23': 94, '24': 358,
+  '25': 186, '26': 130, '27': 110, '28': 366, '29': 300, '30': 218, '31': 76, '32': 199,
+  '33': 406, '34': 258, '35': 384, '36': 156, '37': 84, '38': 116, '39': 97, '40': 424,
+  '41': 98, '42': 100, '43': 91, '44': 500, '45': 111, '46': 166, '47': 131, '48': 540,
+  '49': 194, '50': 211, '51': 350, '52': 175, '53': 137, '54': 494, '55': 222, '56': 90,
+  '57': 110, '58': 110,
+};
+const PARTNER_LOGO_SCALES = {
+  '01': 0.9, '02': 1.25, '03': 0.923, '04': 1.25, '05': 1.218, '06': 1.25, '07': 1.03, '08': 0.93,
+  '09': 0.9, '10': 0.969, '11': 0.988, '12': 0.9, '13': 1.25, '14': 1.08, '15': 1.183, '16': 1.096,
+  '17': 1.061, '18': 1.25, '19': 1.117, '20': 0.934, '21': 0.9, '22': 0.9, '23': 0.944, '24': 1.07,
+  '25': 1.004, '26': 1.16, '27': 0.9, '28': 1.045, '29': 0.927, '30': 0.9, '31': 0.9, '32': 1.206,
+  '33': 1.25, '34': 1.14, '35': 0.911, '36': 1.039, '37': 1.25, '38': 1.209, '39': 1.0, '40': 1.204,
+  '41': 0.9, '42': 1.25, '43': 0.947, '44': 0.9, '45': 1.25, '46': 1.25, '47': 0.995, '48': 1.188,
+  '49': 0.952, '50': 1.011, '51': 0.9, '52': 0.947, '53': 0.9, '54': 0.9, '55': 0.9, '56': 1.072,
+  '57': 0.9, '58': 0.9,
+};
+// Not Object.keys(PARTNER_LOGO_WIDTHS): JS enumerates canonical-integer-looking
+// keys ("10".."58") in numeric order before plain string keys ("01".."09"),
+// which would scramble the intended left-to-right logo sequence.
+const PARTNER_LOGO_NAMES = Array.from({ length: 58 }, (_, i) => String(i + 1).padStart(2, '0'));
+
 const partnersTrack = document.getElementById('partners-track');
 if (partnersTrack) {
-  const LOGO_WIDTHS = {
-    '01': 391, '02': 82, '03': 128, '04': 163, '05': 108, '06': 212, '07': 478, '08': 218,
-    '09': 236, '10': 62, '11': 395, '12': 124, '13': 324, '14': 143, '15': 130, '16': 188,
-    '17': 82, '18': 126, '19': 353, '20': 266, '21': 186, '22': 87, '23': 94, '24': 358,
-    '25': 186, '26': 130, '27': 110, '28': 366, '29': 300, '30': 218, '31': 76, '32': 199,
-    '33': 406, '34': 258, '35': 384, '36': 156, '37': 84, '38': 116, '39': 97, '40': 424,
-    '41': 98, '42': 100, '43': 91, '44': 500, '45': 111, '46': 166, '47': 131, '48': 540,
-    '49': 194, '50': 211, '51': 350, '52': 175, '53': 137, '54': 494, '55': 222, '56': 90,
-    '57': 110, '58': 110,
-  };
-  const LOGO_SCALES = {
-    '01': 0.9, '02': 1.25, '03': 0.923, '04': 1.25, '05': 1.218, '06': 1.25, '07': 1.03, '08': 0.93,
-    '09': 0.9, '10': 0.969, '11': 0.988, '12': 0.9, '13': 1.25, '14': 1.08, '15': 1.183, '16': 1.096,
-    '17': 1.061, '18': 1.25, '19': 1.117, '20': 0.934, '21': 0.9, '22': 0.9, '23': 0.944, '24': 1.07,
-    '25': 1.004, '26': 1.16, '27': 0.9, '28': 1.045, '29': 0.927, '30': 0.9, '31': 0.9, '32': 1.206,
-    '33': 1.25, '34': 1.14, '35': 0.911, '36': 1.039, '37': 1.25, '38': 1.209, '39': 1.0, '40': 1.204,
-    '41': 0.9, '42': 1.25, '43': 0.947, '44': 0.9, '45': 1.25, '46': 1.25, '47': 0.995, '48': 1.188,
-    '49': 0.952, '50': 1.011, '51': 0.9, '52': 0.947, '53': 0.9, '54': 0.9, '55': 0.9, '56': 1.072,
-    '57': 0.9, '58': 0.9,
-  };
-  // Not Object.keys(LOGO_WIDTHS): JS enumerates canonical-integer-looking keys
-  // ("10".."58") in numeric order before plain string keys ("01".."09"),
-  // which would scramble the intended left-to-right logo sequence.
-  const names = Array.from({ length: 58 }, (_, i) => String(i + 1).padStart(2, '0'));
   const buildSet = () =>
-    names
+    PARTNER_LOGO_NAMES
       .map(
         (n) =>
-          `<img src="assets/img/partners/logo-${n}.webp" alt="" width="${LOGO_WIDTHS[n]}" height="110" style="transform:scale(${LOGO_SCALES[n]})">`
+          `<img src="assets/img/partners/logo-${n}.webp" alt="" width="${PARTNER_LOGO_WIDTHS[n]}" height="110" style="transform:scale(${PARTNER_LOGO_SCALES[n]})">`
       )
       .join('');
   partnersTrack.innerHTML = buildSet() + buildSet();
