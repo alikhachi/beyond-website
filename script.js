@@ -248,27 +248,70 @@ document.addEventListener('click', (e) => {
   }, 220);
 });
 
-// Contact form: client-side only, opens mail client with prefilled message
+// Contact form: submits straight to the agency's inbox via Web3Forms (a free
+// relay for static sites, which can't send email on their own) instead of
+// opening the visitor's own mail client and making them hit send themselves.
 const form = document.getElementById('contact-form');
 const formNote = document.getElementById('form-note');
 
 if (form) {
-  form.addEventListener('submit', (e) => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitLabel = submitBtn ? submitBtn.textContent : '';
+
+  const t = (key, fallback) => {
+    if (typeof getLang !== 'function' || typeof TRANSLATIONS === 'undefined') return fallback;
+    const dict = TRANSLATIONS[getLang()] || TRANSLATIONS.ar;
+    return dict[key] || fallback;
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
 
     if (!name || !email || !message) {
-      formNote.textContent = 'الرجاء تعبئة جميع الحقول.';
+      formNote.textContent = t('form.validation', 'الرجاء تعبئة جميع الحقول.');
       return;
     }
 
-    const subject = encodeURIComponent(`طلب تواصل من ${name} - موقع Beyond`);
-    const body = encodeURIComponent(`الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\nالرسالة:\n${message}`);
-    window.location.href = `mailto:info@beyond4m.com?subject=${subject}&body=${body}`;
+    formNote.textContent = t('form.sending', 'جارٍ إرسال رسالتك...');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = t('form.sending', 'جارٍ إرسال رسالتك...');
+    }
 
-    formNote.textContent = 'جارٍ فتح برنامج البريد الإلكتروني لإرسال رسالتك...';
-    form.reset();
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: 'b995909d-aee3-4dc4-a22d-2019d0a89c7f',
+          subject: `طلب تواصل من ${name} - موقع Beyond`,
+          from_name: 'Beyond Website',
+          name,
+          email,
+          message,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        formNote.textContent = t('form.success', 'تم إرسال رسالتك بنجاح! سنتواصل معك بأسرع وقت.');
+        form.reset();
+      } else {
+        throw new Error(data.message || 'submit failed');
+      }
+    } catch (err) {
+      formNote.textContent = t(
+        'form.error',
+        'حدث خطأ أثناء الإرسال. حاول مرة أخرى أو راسلنا مباشرة على info@beyond4m.com'
+      );
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+      }
+    }
   });
 }

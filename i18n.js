@@ -142,7 +142,9 @@ const TRANSLATIONS = {
     'form.message.placeholder': 'أخبرنا عن مشروعك...',
     'form.submit': 'إرسال الرسالة',
     'form.validation': 'الرجاء تعبئة جميع الحقول.',
-    'form.sending': 'جارٍ فتح برنامج البريد الإلكتروني لإرسال رسالتك...',
+    'form.sending': 'جارٍ إرسال رسالتك...',
+    'form.success': 'تم إرسال رسالتك بنجاح! سنتواصل معك بأسرع وقت.',
+    'form.error': 'حدث خطأ أثناء الإرسال. حاول مرة أخرى أو راسلنا مباشرة على info@beyond4m.com',
 
     'footer.tagline': 'MARATHON, NOT A RACE — شركاؤكم في النجاح',
     'footer.copy': '© 2026 Beyond Marketing Agency. جميع الحقوق محفوظة.',
@@ -302,7 +304,9 @@ const TRANSLATIONS = {
     'form.message.placeholder': 'Tell us about your project...',
     'form.submit': 'Send Message',
     'form.validation': 'Please fill in all fields.',
-    'form.sending': 'Opening your email client to send your message...',
+    'form.sending': 'Sending your message...',
+    'form.success': "Your message was sent successfully! We'll get back to you soon.",
+    'form.error': 'Something went wrong while sending. Please try again or email us directly at info@beyond4m.com',
 
     'footer.tagline': 'MARATHON, NOT A RACE — Your Partners in Success',
     'footer.copy': '© 2026 Beyond Marketing Agency. All rights reserved.',
