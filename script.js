@@ -34,7 +34,7 @@ const PARTNER_LOGO_WIDTHS = {
   '33': 406, '34': 258, '35': 384, '36': 156, '37': 84, '38': 116, '39': 97, '40': 424,
   '41': 98, '42': 100, '43': 91, '44': 500, '45': 111, '46': 166, '47': 131, '48': 540,
   '49': 194, '50': 211, '51': 350, '52': 175, '53': 137, '54': 494, '55': 222, '56': 90,
-  '57': 110, '58': 110,
+  '57': 110, '58': 110, '59': 110,
 };
 const PARTNER_LOGO_SCALES = {
   '01': 0.9, '02': 1.25, '03': 0.923, '04': 1.25, '05': 1.218, '06': 1.25, '07': 1.03, '08': 0.93,
@@ -44,12 +44,12 @@ const PARTNER_LOGO_SCALES = {
   '33': 1.25, '34': 1.14, '35': 0.911, '36': 1.039, '37': 1.25, '38': 1.209, '39': 1.0, '40': 1.204,
   '41': 0.9, '42': 1.25, '43': 0.947, '44': 0.9, '45': 1.25, '46': 1.25, '47': 0.995, '48': 1.188,
   '49': 0.952, '50': 1.011, '51': 0.9, '52': 0.947, '53': 0.9, '54': 0.9, '55': 0.9, '56': 1.072,
-  '57': 0.9, '58': 0.9,
+  '57': 0.9, '58': 0.9, '59': 1.0,
 };
 // Not Object.keys(PARTNER_LOGO_WIDTHS): JS enumerates canonical-integer-looking
-// keys ("10".."58") in numeric order before plain string keys ("01".."09"),
+// keys ("10".."59") in numeric order before plain string keys ("01".."09"),
 // which would scramble the intended left-to-right logo sequence.
-const PARTNER_LOGO_NAMES = Array.from({ length: 58 }, (_, i) => String(i + 1).padStart(2, '0'));
+const PARTNER_LOGO_NAMES = Array.from({ length: 59 }, (_, i) => String(i + 1).padStart(2, '0'));
 
 const partnersTrack = document.getElementById('partners-track');
 if (partnersTrack) {
