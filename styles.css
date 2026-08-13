@@ -573,6 +573,7 @@ body.page-exit{ animation: page-fade-out .25s ease forwards; }
   border: 1px solid var(--border-soft);
   padding: 20px 0;
   overflow: hidden;
+  direction: ltr;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
           mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
@@ -581,6 +582,7 @@ body.page-exit{ animation: page-fade-out .25s ease forwards; }
   align-items:center;
   gap: 40px;
   width: max-content;
+  direction: ltr;
   animation: marquee 34s linear infinite;
 }
 .partners-wrap:hover .marquee-track{ animation-play-state: paused; }
