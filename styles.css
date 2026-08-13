@@ -594,6 +594,18 @@ body.page-exit{ animation: page-fade-out .25s ease forwards; }
 @media (prefers-reduced-motion: reduce){
   .marquee-track{ animation: none; }
 }
+/* Logos are precomputed at height:110 on desktop; shrinking height here is
+   safe without touching the JS width/scale tables — the img width/height
+   HTML attributes give the browser an implicit aspect-ratio, so width:auto
+   still resolves to the correct proportional width at any CSS height. */
+@media (max-width: 720px){
+  .marquee-track{ gap: 26px; animation-duration: 50s; }
+  .marquee-track img{ height: 64px; }
+}
+@media (max-width: 480px){
+  .marquee-track{ gap: 20px; animation-duration: 44s; }
+  .marquee-track img{ height: 52px; }
+}
 
 /* ============ Testimonials ============ */
 .testimonial-grid{
@@ -787,7 +799,9 @@ body.page-exit{ animation: page-fade-out .25s ease forwards; }
 @media (max-width: 980px){
   .ourwork-grid{ grid-template-columns: repeat(2, 1fr); }
   .partners-page-grid{ grid-template-columns: 1fr; }
-  .partners-cta-card{ position: static; }
+  /* Stacked single-column layout would otherwise bury the contact CTA
+     below all 60 logo tiles — show it first so it isn't missed on mobile. */
+  .partners-cta-card{ position: static; order: -1; margin-bottom: 8px; }
 }
 @media (max-width: 720px){
   .ourwork-grid{ grid-template-columns: 1fr; }
